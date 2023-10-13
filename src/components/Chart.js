@@ -23,34 +23,18 @@ ChartJS.register(
     Legend
 )
 
-function Chart() {
+function Chart({ type, data, options }) {
+    const ChartComponent = {
+        Bar: Bar,
+        Doughnut: Doughnut,
+        PolarArea: PolarArea
+    }[type];
 
-    const data = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green'],
-        datasets: [
-          {
-            labe: '369',
-            data: [12, 19, 3, 5],
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
-            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
-          },
-        ],
-      };
-
-      const options = {
-        responsive: true,
-
-      }
-
-
-  return (
-    <div className="chart">
-        
-        <Bar data={data}
-        options={options}> </Bar> 
-    </div>
-    
-  );
+    return (
+        <div className="chart">
+            <ChartComponent data={data} options={options} />
+        </div>
+    );
 }
 
 export default Chart;
