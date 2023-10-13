@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Navigation from "./components/Navigation";
+import Topbar from "./components/Topbar";
+import { Routes } from "react-router-dom";
+import Card from "./components/Card";
+import Table from "./components/Table";
+import Chart from "./components/Chart";
 
 function App() {
+  const [isNavActive, setIsNavActive] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Navigation isActive={isNavActive} />
+      <div className={`main ${isNavActive ? "active" : ""}`}>
+        <Topbar onToggleClick={() => setIsNavActive(!isNavActive)} />
+        <div className="cardBox"> 
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
+        <div className="chartsContainer">
+          <Chart ></Chart>
+          <Chart ></Chart>
+        </div>
+        <Table />      
+        <Routes>{/* Ihre Routen hier */}</Routes>
+      </div>
     </div>
   );
 }
