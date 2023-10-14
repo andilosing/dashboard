@@ -12,12 +12,12 @@ import {
 } from "ionicons/icons";
 import { IonIcon } from "@ionic/react";
 
-function Navigation({ isActive }) {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+function Navigation({onNavClick, isActive }) {
+  
 
   const menuItems = [
     { icon: logoApple, title: "Real Estate Dashboard", link: "/" },
-    { icon: homeOutline, title: "Dashboard", link: "/dashboard" },
+    { icon: homeOutline, title: "Dashboard", link: "/zinseszinsrechner" },
     { icon: personOutline, title: "Customers", link: "/customers" },
     { icon: chatbubbleOutline, title: "Message", link: "/message" },
     { icon: helpOutline, title: "Help", link: "/help" },
@@ -26,15 +26,20 @@ function Navigation({ isActive }) {
     { icon: logOutOutline, title: "Logout", link: "/logout" },
   ];
 
+  const defaultClickedIndex = menuItems.findIndex(item => item.title === "Dashboard");
+  const [clickedIndex, setClickedIndex] = useState(defaultClickedIndex);
+
   return (
     <nav className={`navigation ${isActive ? 'active' : ''}`}>
       <ul>
         {menuItems.map(({ icon, title, link }, index) => (
           <li 
             key={index} 
-            onMouseOver={() => setHoveredIndex(index)}
-            className={hoveredIndex === index ? "hovered" : ""}
-          >
+            className={clickedIndex === index ? "clicked" : ""}
+            onClick={() => {
+              onNavClick();
+              setClickedIndex(index);
+            }}>
             <Link to={link}>
               <span className="icon">
                 <IonIcon icon={icon} />

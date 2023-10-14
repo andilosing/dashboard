@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import "./App.css";
 import Navigation from "./components/Navigation";
 import Topbar from "./components/Topbar";
-import { Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Card from "./components/Card";
 import Table from "./components/Table";
 import Chart from "./components/Chart";
+import Zinseszinsrechner from "./components/Zinseszinsrechner";
 
 function App() {
   const [isNavActive, setIsNavActive] = useState(false);
@@ -39,10 +40,11 @@ const options = {
 
   return (
     <div className="container">
-      <Navigation isActive={isNavActive} />
+      <Navigation isActive={isNavActive} onNavClick={() => setIsNavActive(false)} />
       <div className={`main ${isNavActive ? "active" : ""}`}>
         <Topbar onToggleClick={() => setIsNavActive(!isNavActive)} />
-        <div className="cardBox"> 
+        <Zinseszinsrechner />
+      {/*}  <div className="cardBox"> 
           <Card />
           <Card />
           <Card />
@@ -52,8 +54,10 @@ const options = {
         <Chart type="Bar" data={chartData1} options={options} />
                 <Chart type="Doughnut" data={chartData2} options={options} />
         </div>
-        <Table />      
-        <Routes>{/* Ihre Routen hier */}</Routes>
+  <Table />     
+        <Routes>
+          <Route path="zinseszinsrechner" element={<Zinseszinsrechner />} />
+        </Routes>*/} 
       </div>
     </div>
   );
